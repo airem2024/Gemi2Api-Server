@@ -353,8 +353,8 @@ async def list_models():
 
 # Helper to convert between Gemini and OpenAI model names
 def map_model_name(openai_model_name: str) -> Model:
-    return "gemini-3.1-pro-preview"
-
+    # 删掉所有旧的逻辑，只留下面这一行，这次返回的是正确的“对象”！
+    return Model.GEMINI_3_1_PRO_PREVIEW
 	# 如果还是找不到，返回第一个模型
 	return next(iter(Model))
 
