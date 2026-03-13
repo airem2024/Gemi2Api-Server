@@ -353,33 +353,7 @@ async def list_models():
 
 # Helper to convert between Gemini and OpenAI model names
 def map_model_name(openai_model_name: str) -> Model:
-	"""根据模型名称字符串查找匹配的 Model 枚举值"""
-	# 打印所有可用模型以便调试
-	all_models = [m.model_name if hasattr(m, "model_name") else str(m) for m in Model]
-	logger.info(f"Available models: {all_models}")
-
-	# 首先尝试直接查找匹配的模型名称
-	for m in Model:
-		model_name = m.model_name if hasattr(m, "model_name") else str(m)
-		if openai_model_name.lower() in model_name.lower():
-			return m
-
-	# 如果找不到匹配项，使用默认映射
-	model_keywords = {
-		"gemini-pro": ["pro", "2.0"],
-		"gemini-pro-vision": ["vision", "pro"],
-		"gemini-flash": ["flash", "2.0"],
-		"gemini-1.5-pro": ["1.5", "pro"],
-		"gemini-1.5-flash": ["1.5", "flash"],
-	}
-
-	# 根据关键词匹配
-	keywords = model_keywords.get(openai_model_name, ["pro"])  # 默认使用pro模型
-
-	for m in Model:
-		model_name = m.model_name if hasattr(m, "model_name") else str(m)
-		if all(kw.lower() in model_name.lower() for kw in keywords):
-			return m
+    return "gemini-3.1-pro-preview"
 
 	# 如果还是找不到，返回第一个模型
 	return next(iter(Model))
